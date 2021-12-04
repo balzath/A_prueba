@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     sentencia = item_params[:sentence]
-    @item.answer = Item.evaluar(sentencia)
+    @item.answer = Item.evaluar2(sentencia)
     if @item.save
       redirect_to root_path, notice: "sentencia evaluada con exito" 
     end
