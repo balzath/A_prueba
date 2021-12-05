@@ -56,10 +56,20 @@ class Item < ApplicationRecord
       end
       eliminar.sort.each_with_index do |e,i|
         aux.delete_at(e-i)
-      end 
+      end
+      carita_t = ':('
+      carita_f = ':)'
+      n_caritas_t = cadena.scan(/(?=#{Regexp.escape(carita_t)})/).count
+      n_caritas_f = cadena.scan(/(?=#{Regexp.escape(carita_f)})/).count
       aux = aux.join('')
-      aux = aux.gsub ":)", ""
-      aux = aux.gsub ":(", ""
+      n_caritas_t_a = aux.scan(/(?=#{Regexp.escape(carita_t)})/).count
+      n_caritas_f_a = aux.scan(/(?=#{Regexp.escape(carita_f)})/).count
+      if n_caritas_t >= n_caritas_t_a
+        aux = aux.gsub ":(", ""
+      end
+      if n_caritas_f >= n_caritas_f_a
+        aux = aux.gsub ":)", ""
+      end 
       if aux.include?(')') or aux.include?('(')
         estado = 'desbalanceado'
       end
